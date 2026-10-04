@@ -199,7 +199,7 @@ class _EditorPageState extends State<EditorPage> {
             width: 150,
             height: 40,
             child: DropdownButtonFormField<String>(
-              value: _fontFamily,
+              initialValue: _fontFamily,
               decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 6)),
               items: const ['Arial', 'Calibri', 'Times New Roman'].map((e) => DropdownMenuItem(value: e, child: Text(e, style: TextStyle(fontSize: 12)))).toList(),
               onChanged: (v) {
@@ -214,7 +214,7 @@ class _EditorPageState extends State<EditorPage> {
             width: 72,
             height: 40,
             child: DropdownButtonFormField<double>(
-              value: _fontSize,
+              initialValue: _fontSize,
               decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6)),
               items: <double>[10, 11, 12, 14, 16, 18, 20, 24, 28, 32].map((e) => DropdownMenuItem(value: e, child: Text('${e.toInt()}'))).toList(),
               onChanged: (v) {
