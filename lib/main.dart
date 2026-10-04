@@ -35,6 +35,7 @@ class _EditorPageState extends State<EditorPage> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _editorFocus = FocusNode();
   double _fontSize = 14;
+  String _fontFamily = 'Arial';
   double _zoom = 1;
   bool _bold = false;
   bool _italic = false;
@@ -53,6 +54,7 @@ class _EditorPageState extends State<EditorPage> {
       _controller.clear();
       _documentName = 'Documento sem título';
       _fontSize = 14;
+      _fontFamily = 'Arial';
       _bold = false;
       _italic = false;
       _underline = false;
@@ -179,8 +181,8 @@ class _EditorPageState extends State<EditorPage> {
 
   Widget _buildToolbar() {
     return Container(
-      constraints: const BoxConstraints(minHeight: 78),
-      padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
+      constraints: const BoxConstraints(minHeight: 64),
+      padding: const EdgeInsets.fromLTRB(18, 8, 18, 8),
       decoration: const BoxDecoration(
         color: Color(0xFF0E1726),
         border: Border(bottom: BorderSide(color: Color(0xFF17334B))),
@@ -195,21 +197,30 @@ class _EditorPageState extends State<EditorPage> {
           _divider(),
           SizedBox(
             width: 150,
+            height: 40,
             child: DropdownButtonFormField<String>(
-              initialValue: 'Arial',
-              decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 9)),
+              value: _fontFamily,
+              decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 6)),
               items: const ['Arial', 'Calibri', 'Times New Roman'].map((e) => DropdownMenuItem(value: e, child: Text(e, style: TextStyle(fontSize: 12)))).toList(),
-              onChanged: (_) {},
+              onChanged: (v) {
+                if (v == null) return;
+                setState(() => _fontFamily = v);
+                _editorFocus.requestFocus();
+              },
             ),
           ),
           const SizedBox(width: 7),
           SizedBox(
             width: 72,
+            height: 40,
             child: DropdownButtonFormField<double>(
               value: _fontSize,
-              decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 9)),
+              decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6)),
               items: <double>[10, 11, 12, 14, 16, 18, 20, 24, 28, 32].map((e) => DropdownMenuItem(value: e, child: Text('${e.toInt()}'))).toList(),
-              onChanged: (v) => setState(() => _fontSize = v ?? 14),
+              onChanged: (v) {
+                setState(() => _fontSize = v ?? 14);
+                _editorFocus.requestFocus();
+              },
             ),
           ),
           _divider(),
@@ -253,7 +264,8 @@ class _EditorPageState extends State<EditorPage> {
 
   Widget _buildWorkspace() {
     return LayoutBuilder(builder: (context, constraints) {
-      final pageWidth = (794.0 * _zoom).clamp(520.0, constraints.maxWidth - 48);
+      final availableWidth = (constraints.maxWidth - 48).clamp(280.0, double.infinity);
+      final pageWidth = (794.0 * _zoom).clamp(280.0, availableWidth);
       final pageHeight = 1123.0 * _zoom;
       return Container(
         decoration: const BoxDecoration(
@@ -288,6 +300,7 @@ class _EditorPageState extends State<EditorPage> {
                 onChanged: (_) => setState(() {}),
                 style: TextStyle(
                   fontSize: _fontSize * _zoom,
+                  fontFamily: _fontFamily,
                   height: 1.5,
                   fontWeight: _bold ? FontWeight.bold : FontWeight.normal,
                   fontStyle: _italic ? FontStyle.italic : FontStyle.normal,
