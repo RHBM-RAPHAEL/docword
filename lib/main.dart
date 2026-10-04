@@ -196,10 +196,11 @@ class _EditorPageState extends State<EditorPage> {
           _toolIcon(Icons.redo, 'Refazer', () => _comingSoon('Refazer')),
           _divider(),
           SizedBox(
-            width: 150,
+            width: 200,
             height: 40,
             child: DropdownButtonFormField<String>(
               initialValue: _fontFamily,
+              isExpanded: true,
               decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 6)),
               items: const ['Arial', 'Calibri', 'Times New Roman'].map((e) => DropdownMenuItem(value: e, child: Text(e, style: TextStyle(fontSize: 12)))).toList(),
               onChanged: (v) {
@@ -211,10 +212,11 @@ class _EditorPageState extends State<EditorPage> {
           ),
           const SizedBox(width: 7),
           SizedBox(
-            width: 72,
+            width: 90,
             height: 40,
             child: DropdownButtonFormField<double>(
               initialValue: _fontSize,
+              isExpanded: true,
               decoration: const InputDecoration(isDense: true, border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF31516B))), contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6)),
               items: <double>[10, 11, 12, 14, 16, 18, 20, 24, 28, 32].map((e) => DropdownMenuItem(value: e, child: Text('${e.toInt()}'))).toList(),
               onChanged: (v) {
