@@ -1,18 +1,42 @@
 # DocWord
 
-Editor de documentos da RHBM TecnoWork, desenvolvido em Flutter.
+Editor de documentos gratuito da **RHBM TecnoWork**, desenvolvido em Flutter.
 
-## Versão 0.1
-- Interface desktop inspirada em suítes de escritório, com identidade própria RHBM TecnoWork.
-- Área de edição em página A4.
-- Tamanho da fonte, negrito, itálico, sublinhado e alinhamento.
-- Marcadores e numeração básica.
-- Contador de palavras e controle de zoom.
-- Menu Arquivo preparado para Novo, Abrir, Salvar e exportação PDF.
+## Versão 0.2 — Rich Text
 
-Execute com:
+A versão 0.2 substitui o campo de texto simples por um motor de edição rich text baseado em Flutter Quill.
+
+### Recursos atuais
+
+- Formatação por seleção de texto.
+- Negrito, itálico, sublinhado, tachado e outros controles rich text da toolbar.
+- Alinhamento e listas estruturadas.
+- Undo/redo pelo motor do editor.
+- Atalhos de documento:
+  - `Ctrl+N`: novo documento.
+  - `Ctrl+O`: abrir documento.
+  - `Ctrl+S`: salvar documento.
+- Formato nativo `.docword`, armazenando o documento em Delta JSON.
+- Abrir e salvar documentos `.docword`.
+- Exportação para `.txt`.
+- Indicador de alterações não salvas.
+- Renomear documento clicando no nome no topo.
+- Contador de palavras e caracteres.
+- Zoom de 70% a 140%.
+- Interface desktop com identidade própria da RHBM TecnoWork.
+
+## Executar
 
 ```bash
 flutter pub get
 flutter run -d windows
 ```
+
+## Verificação
+
+```bash
+flutter analyze
+flutter test
+```
+
+Veja `docs/ROADMAP.md` para as próximas etapas.
